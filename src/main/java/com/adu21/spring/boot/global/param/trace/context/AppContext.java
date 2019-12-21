@@ -11,6 +11,8 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 public class AppContext implements Serializable {
     public static final String TRACE_ID_HEADER = "Trace-Id";
     public static final String USER_ID_HEADER = "User-Id";
+    public static final String KEY_TRACE_ID = "traceId";
+    public static final String KEY_USER_ID = "userId";
     private static final long serialVersionUID = -979220111440953115L;
 
     private String traceId;
