@@ -12,7 +12,7 @@
     <artifactId>global-param-trace</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>global-param-trace</name>
-    <description>Demo project for Spring Boot</description>
+    <description>This is a demo for enable global param via spring boot and trace via log.</description>
 
     <properties>
         <java.version>1.8</java.version>
