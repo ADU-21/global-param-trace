@@ -23,7 +23,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getById(Long userId) throws InterruptedException, ExecutionException {
+    public User getCurrentUser() throws InterruptedException, ExecutionException {
+        Long userId = AppContext.getContext().getUserId();
         log.info("[{}]Get user by id={}", AppContext.getContext().getTraceId(), userId);
         try {
             return THREAD_POOL.submit(() -> userRepository.getUserById(userId)).get();

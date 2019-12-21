@@ -35,6 +35,11 @@ public class ContextFilter implements Filter {
             AppContext.getContext().setTraceId(traceId);
         }
 
+        String userId = request.getHeader(AppContext.USER_ID_HEADER);
+        if (StringUtils.isNotBlank(userId)) {
+            AppContext.getContext().setUserId(Long.valueOf(userId));
+        }
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

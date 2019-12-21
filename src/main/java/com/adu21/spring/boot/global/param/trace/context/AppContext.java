@@ -10,9 +10,11 @@ import com.alibaba.ttl.TransmittableThreadLocal;
  */
 public class AppContext implements Serializable {
     public static final String TRACE_ID_HEADER = "Trace-Id";
+    public static final String USER_ID_HEADER = "User-Id";
     private static final long serialVersionUID = -979220111440953115L;
 
     private String traceId;
+    private Long userId;
 
     private static final TransmittableThreadLocal<AppContext> LOCAL = new TransmittableThreadLocal<AppContext>() {
         @Override
@@ -39,5 +41,13 @@ public class AppContext implements Serializable {
 
     public void setTraceId(String traceId) {
         this.traceId = traceId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
