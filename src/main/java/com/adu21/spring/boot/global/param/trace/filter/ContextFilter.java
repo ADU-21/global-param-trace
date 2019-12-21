@@ -10,8 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import com.adu21.spring.boot.global.param.trace.context.AppContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.core.Ordered;
@@ -31,11 +31,9 @@ public class ContextFilter implements Filter {
         throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        Enumeration<String> headerNames = request.getHeaderNames();
-        String traceId = request.getHeader("Trace-Id");
-
+        String traceId = request.getHeader(AppContext.TRACE_ID_HEADER);
         if (StringUtils.isNotBlank(traceId)) {
-            log.info(traceId);
+            AppContext.getContext().setTraceId(traceId);
         }
 
         filterChain.doFilter(servletRequest, servletResponse);
