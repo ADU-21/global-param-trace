@@ -25,7 +25,7 @@ public class UserService {
 
     public User getCurrentUser() throws InterruptedException, ExecutionException {
         Long userId = AppContext.getContext().getUserId();
-        log.info("[{}]Get user by id={}", AppContext.getContext().getTraceId(), userId);
+        log.info("Get user by id={}", userId);
         try {
             return THREAD_POOL.submit(() -> userRepository.getUserById(userId)).get();
         } catch (ExecutionException e) {

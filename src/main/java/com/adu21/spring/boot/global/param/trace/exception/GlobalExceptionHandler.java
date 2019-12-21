@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public GenericResult handleException(CommonException e) {
-        log.error("Exception happen", e);
+        log.error("Common exception happen", e);
         return GenericResult.builder()
             .errorCode(e.getErrorCode())
             .errorMsg(e.getErrorMsg())
