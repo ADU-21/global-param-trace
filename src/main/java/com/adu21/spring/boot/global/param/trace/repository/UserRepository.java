@@ -3,6 +3,7 @@ package com.adu21.spring.boot.global.param.trace.repository;
 import java.util.Arrays;
 import java.util.List;
 
+import com.adu21.spring.boot.global.param.trace.annotation.MdcCompensation;
 import com.adu21.spring.boot.global.param.trace.context.AppContext;
 import com.adu21.spring.boot.global.param.trace.exception.CommonException;
 import com.adu21.spring.boot.global.param.trace.model.User;
@@ -21,6 +22,7 @@ public class UserRepository {
     private List<User> users = Arrays.asList(new User(1L, "First"),
         new User(2L, "Second"), new User(3L, "Third"));
 
+    @MdcCompensation
     public User getUserById(Long userId) {
         log.info("Get user by id={}", userId);
         return users.stream()
