@@ -1,7 +1,6 @@
 package com.adu21.spring.boot.global.param.trace.filter;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

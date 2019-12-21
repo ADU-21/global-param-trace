@@ -28,4 +28,15 @@ public class GlobalExceptionHandler {
             .build();
     }
 
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public GenericResult handleException(Exception e) {
+        log.error("Unknown exception happen", e);
+        return GenericResult.builder()
+            .errorCode(-1L)
+            .errorMsg(e.getMessage())
+            .build();
+    }
+
 }

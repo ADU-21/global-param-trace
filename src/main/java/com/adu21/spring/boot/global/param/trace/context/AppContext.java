@@ -2,6 +2,8 @@ package com.adu21.spring.boot.global.param.trace.context;
 
 import java.io.Serializable;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
+
 /**
  * @author LukeDu
  * @date 2019/12/21
@@ -12,7 +14,12 @@ public class AppContext implements Serializable {
 
     private String traceId;
 
-    private static final ThreadLocal<AppContext> LOCAL = ThreadLocal.withInitial(AppContext::new);
+    private static final TransmittableThreadLocal<AppContext> LOCAL = new TransmittableThreadLocal<AppContext>() {
+        @Override
+        protected AppContext initialValue() {
+            return new AppContext();
+        }
+    };
 
     public static AppContext getContext() {
         return LOCAL.get();

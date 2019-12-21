@@ -1,5 +1,7 @@
 package com.adu21.spring.boot.global.param.trace.controller;
 
+import java.util.concurrent.ExecutionException;
+
 import com.adu21.spring.boot.global.param.trace.model.User;
 import com.adu21.spring.boot.global.param.trace.serivce.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user")
-    public User getUser(@RequestParam("id")Long userId) {
+    public User getUser(@RequestParam("id")Long userId) throws ExecutionException, InterruptedException {
         return userService.getById(userId);
     }
 }
