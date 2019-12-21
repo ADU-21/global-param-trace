@@ -36,4 +36,9 @@ public class UserService {
             throw e;
         }
     }
+
+    public Long save(User user) {
+        log.info("Save user={}", user);
+        return userRepository.save(user);
+    }
 }
