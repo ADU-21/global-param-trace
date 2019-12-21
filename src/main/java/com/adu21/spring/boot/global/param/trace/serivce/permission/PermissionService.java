@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class PermissionService {
     public boolean hasPermission(Long userId, UserPermission userPermission) {
         log.info("Check user {} has permission on {}", userId, userPermission.getCode());
-        return PermissionFactory.createAuthorizationService(userPermission).isGranted(userId);
+        AuthorizationService authService = PermissionFactory.createAuthorizationService(userPermission);
+        return authService.isGranted(userId);
     }
 }

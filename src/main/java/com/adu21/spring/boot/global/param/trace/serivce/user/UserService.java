@@ -1,4 +1,4 @@
-package com.adu21.spring.boot.global.param.trace.serivce;
+package com.adu21.spring.boot.global.param.trace.serivce.user;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;

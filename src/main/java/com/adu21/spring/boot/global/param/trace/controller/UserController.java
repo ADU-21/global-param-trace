@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutionException;
 import com.adu21.spring.boot.global.param.trace.annotation.HasPermission;
 import com.adu21.spring.boot.global.param.trace.enums.UserPermission;
 import com.adu21.spring.boot.global.param.trace.model.User;
-import com.adu21.spring.boot.global.param.trace.serivce.UserService;
+import com.adu21.spring.boot.global.param.trace.serivce.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

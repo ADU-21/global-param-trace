@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 import com.adu21.spring.boot.global.param.trace.context.AppContext;
 import com.adu21.spring.boot.global.param.trace.model.User;
 import com.adu21.spring.boot.global.param.trace.repository.UserRepository;
+import com.adu21.spring.boot.global.param.trace.serivce.user.UserService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

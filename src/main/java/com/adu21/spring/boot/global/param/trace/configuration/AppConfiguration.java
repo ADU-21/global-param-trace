@@ -1,6 +1,5 @@
 package com.adu21.spring.boot.global.param.trace.configuration;
 
-import com.adu21.spring.boot.global.param.trace.interceptor.MdcInterceptor;
 import com.adu21.spring.boot.global.param.trace.interceptor.PermissionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,15 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 public class AppConfiguration extends WebMvcConfigurerAdapter {
-
-    @Autowired
-    private MdcInterceptor mdcInterceptor;
     @Autowired
     private PermissionInterceptor permissionInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(mdcInterceptor);
         registry.addInterceptor(permissionInterceptor);
     }
 }
