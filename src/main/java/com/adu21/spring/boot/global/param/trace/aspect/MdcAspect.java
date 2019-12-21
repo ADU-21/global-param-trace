@@ -1,5 +1,6 @@
 package com.adu21.spring.boot.global.param.trace.aspect;
 
+import com.adu21.spring.boot.global.param.trace.annotation.MdcCompensation;
 import com.adu21.spring.boot.global.param.trace.context.AppContext;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,11 +20,8 @@ public class MdcAspect {
     @Pointcut("execution(* com.adu21.spring.boot.global.param.trace.repository..*.*(..))")
     public void service() {}
 
-    @Pointcut("@annotation(com.adu21.spring.boot.global.param.trace.annotation.MdcCompensation)")
-    public void mdcCompensationAnnotation() {}
-
-    @Before(value = "service() && mdcCompensationAnnotation()")
-    public void doBefore() {
+    @Before(value = "service() && @annotation(mdcCompensation)")
+    public void doBefore(MdcCompensation mdcCompensation) {
         MDC.put(AppContext.KEY_TRACE_ID, AppContext.getContext().getTraceId());
     }
 }

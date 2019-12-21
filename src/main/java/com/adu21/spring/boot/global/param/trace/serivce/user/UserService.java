@@ -19,26 +19,40 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 public class UserService {
-    private static final ExecutorService THREAD_POOL = Executors.newFixedThreadPool(5);
+    private static final ExecutorService GET_USER_THREAD_POOL = Executors.newFixedThreadPool(5);
+    private static final ExecutorService SAVE_USER_THREAD_POOL = Executors.newFixedThreadPool(5);
     @Autowired
     private UserRepository userRepository;
 
     public User getCurrentUser() throws InterruptedException, ExecutionException {
         Long userId = AppContext.getContext().getUserId();
+        log.info("Get current user id={}", userId);
+        return getUser(userId);
+    }
+
+    public User getUser(Long userId) throws InterruptedException, ExecutionException {
         log.info("Get user by id={}", userId);
         try {
-            return THREAD_POOL.submit(() -> userRepository.getUserById(userId)).get();
+            return GET_USER_THREAD_POOL.submit(() -> userRepository.getUserById(userId)).get();
         } catch (ExecutionException e) {
             Throwable t = e.getCause();
             if (t instanceof CommonException) {
-                throw (CommonException) t;
+                throw (CommonException)t;
             }
             throw e;
         }
     }
 
-    public Long save(User user) {
+    public Long save(User user) throws InterruptedException, ExecutionException {
         log.info("Save user={}", user);
-        return userRepository.save(user);
+        try {
+            return SAVE_USER_THREAD_POOL.submit(() -> userRepository.save(user)).get();
+        } catch (ExecutionException e) {
+            Throwable t = e.getCause();
+            if (t instanceof CommonException) {
+                throw (CommonException)t;
+            }
+            throw e;
+        }
     }
 }

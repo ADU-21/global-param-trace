@@ -19,22 +19,27 @@ import static com.adu21.spring.boot.global.param.trace.exception.CommonErrorCode
 @Repository
 @Slf4j
 public class UserRepository {
-    private List<User> users = new ArrayList<>(Arrays.asList(new User(1L, "First"),
+    private final List<User> users = new ArrayList<>(Arrays.asList(new User(1L, "First"),
         new User(2L, "Second"), new User(3L, "Third")));
 
     @MdcCompensation
     public User getUserById(Long userId) {
-        log.info("Get user by id={}", userId);
-        return users.stream()
-            .filter(user -> userId.equals(user.getId()))
-            .findFirst()
-            .orElseThrow(() -> new CommonException(RESOURCE_NOT_FOUND));
+        synchronized (users) {
+            log.info("Get user by id={}", userId);
+            return users.stream()
+                .filter(user -> userId.equals(user.getId()))
+                .findFirst()
+                .orElseThrow(() -> new CommonException(RESOURCE_NOT_FOUND));
+        }
     }
 
     public Long save(User user) {
-        Long maxUserId = users.stream().map(User::getId).max(Long::compareTo).get();
-        user.setId(maxUserId + 1);
-        users.add(user);
-        return user.getId();
+        synchronized (users) {
+            log.info("Save user {}", user);
+            Long maxUserId = users.stream().map(User::getId).max(Long::compareTo).get();
+            user.setId(maxUserId + 1);
+            users.add(user);
+            return user.getId();
+        }
     }
 }
