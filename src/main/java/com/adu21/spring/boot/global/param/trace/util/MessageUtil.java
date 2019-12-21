@@ -9,7 +9,8 @@ import com.google.common.collect.ImmutableMap;
  */
 public class MessageUtil {
     private static final ImmutableMap<Long, String> errorMap = ImmutableMap.of(
-        404L, "Resource not found"
+        404L, "Resource not found",
+        403L, "Permission deny"
     );
 
     public static String getMessage(Long errorCode) {

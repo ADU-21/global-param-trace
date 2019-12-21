@@ -6,4 +6,5 @@ package com.adu21.spring.boot.global.param.trace.exception;
  */
 public interface CommonErrorCode {
     Long RESOURCE_NOT_FOUND = 404L;
+    Long PERMISSION_DENY = 403L;
 }

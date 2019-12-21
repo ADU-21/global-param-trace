@@ -2,6 +2,8 @@ package com.adu21.spring.boot.global.param.trace.controller;
 
 import java.util.concurrent.ExecutionException;
 
+import com.adu21.spring.boot.global.param.trace.annotation.HasPermission;
+import com.adu21.spring.boot.global.param.trace.enums.UserPermission;
 import com.adu21.spring.boot.global.param.trace.model.User;
 import com.adu21.spring.boot.global.param.trace.serivce.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,14 @@ public class UserController {
 
     @GetMapping("/user")
     @ResponseStatus(HttpStatus.OK)
+    @HasPermission(UserPermission.GET_USER)
     public User getUser() throws ExecutionException, InterruptedException {
         return userService.getCurrentUser();
     }
 
     @PostMapping("user")
     @ResponseStatus(HttpStatus.ACCEPTED)
+    @HasPermission(UserPermission.SAVE_USER)
     public Long saveUser(@RequestBody User user) {
         return userService.save(user);
     }
