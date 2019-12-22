@@ -33,6 +33,7 @@ public class UserRepository {
         }
     }
 
+    @MdcCompensation
     public Long save(User user) {
         synchronized (users) {
             log.info("Save user {}", user);
