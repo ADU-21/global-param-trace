@@ -2,6 +2,8 @@
 
 This is a demo for enable global param via spring boot and trace via log.
 
+Blog: https://www.duyidong.com/2019/12/21/spring-boot-log-trace/
+
 # How to use
 * Start server
 ```bash
